@@ -1,0 +1,546 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/*===============reset=================*/
+* {
+    list-style: none;
+    margin: 0px;
+    gap: 0px;
+    box-sizing: border-box;
+}
+
+/*===============header=================*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background: #faf8f4;
+    padding: 0 16px;
+    border-bottom: gray solid 1px;
+}
+header ul {
+    position: absolute;
+    display: flex;
+    gap: 20px;
+    right: 20px;
+}
+
+/*===============container=================*/
+.video {
+    width: 80%;
+    max-width: 80%;
+    margin: auto;
+    padding: 5px;
+}
+.line {
+    --strip-height: 100px;
+    /* line.png is 3996 × 187. Exclude the two 1px borders. */
+    --tile-width: calc((var(--strip-height) - 2px) * 3996 / 187);
+    width: 100%;
+    height: var(--strip-height);
+    margin-block: var(--strip-space);
+    background: url(img/line.png) repeat-x 0 center;
+    background-size: var(--tile-width) auto;
+    animation: scroll-strip 40s linear infinite;
+    border-top: gray solid 1px;
+    border-bottom: gray solid 1px;
+}
+
+@keyframes scroll-strip {
+    to { background-position: calc(0px - var(--tile-width)) center; }
+}
+
+.profile_img {
+    position: relative;
+    width: 80%;
+    height: 500px;
+    margin: 20px auto 20px auto;
+}
+.profile_img div {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    visibility: hidden;
+    animation: profile-slide 20s step-end infinite;
+}
+
+.profile_img div:nth-child(1) {
+    background-image: url(img/profile_img_1.png);
+    background-position: center top;
+}
+
+.profile_img div:nth-child(2) {
+    background-image: url(img/profile_img_2.png);
+    animation-delay: 4s;
+}
+
+.profile_img div:nth-child(3) {
+    background-image: url(img/profile_img_3.png);
+    animation-delay: 8s;
+}
+
+.profile_img div:nth-child(4) {
+    background-image: url(img/profile_img_4.png);
+    animation-delay: 12s;
+}
+
+.profile_img div:nth-child(5) {
+    background-image: url(img/profile_img_5.png);
+    animation-delay: 16s;
+}
+
+@keyframes profile-slide {
+    0% { visibility: visible; }
+    20%, 100% { visibility: hidden; }
+}
+
+/*===============footer=================*/
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background: #000;
+    padding: 0 16px;
+}
+footer p {
+    color: #fff;
+    margin: 20px;
+}
+footer .sns {
+    display: flex;
+    gap: 20px;
+}
+footer a {
+    display: block;
+    width:20px;
+    height:20px;
+}
+.instargram {
+    background:url('img/instargram_icon.png') no-repeat;
+    background-size:contain;
+}
+.youtube {
+    background:url('img/youtube_icon.png') no-repeat;
+    background-size:contain;
+}
+.twitter {
+    background:url('img/twitter_icon.png') no-repeat;
+    background-size:contain;
+}
+.pixiv {
+    background:url('img/pixiv_icon.png') no-repeat;
+    background-size:contain;
+}
+:root {
+    --content-width: min(100% - 32px, 1200px);
+    --grid-gap: clamp(12px, 2vw, 24px);
+    --strip-space: clamp(20px, 4vw, 48px);
+    --card-columns: 1;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    font-family: Pretendard, system-ui, sans-serif;
+    color: #171717;
+    background: #faf8f4;
+}
+
+body > footer {
+    margin-block-start: auto;
+}
+header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    height: auto;
+    min-height: 80px;
+    gap: 8px 24px;
+    padding-block: 12px;
+}
+header .site-logo { grid-column: 2; justify-self: center; }
+
+header nav { grid-column: 3; justify-self: end; min-width: 0; }
+@media (max-width: 1180px) {
+    header { grid-template-columns: minmax(0, 1fr); }
+    header .site-logo, header nav { grid-column: 1; }
+}
+header ul { position: static; flex-wrap: wrap; justify-content: flex-end; gap: 8px 16px; padding: 0; }
+a:focus-visible { outline: 3px solid #167acc; outline-offset: 3px; }
+.video { width: min(100% - 24px, 1100px); max-width: none; padding: 0; margin: 16px auto; }
+.album {
+    width: var(--content-width);
+    margin: 0 auto 32px;
+}
+
+.album,
+.home-tracks,
+.live-photos {
+    display: grid;
+    grid-template-columns: repeat(var(--card-columns), minmax(0, 1fr));
+    gap: var(--grid-gap);
+}
+.album_img { min-width: 0; }
+.album_img img, .artwork-grid img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: #f5f5f5; border: 1px solid #d7d7d7; }
+.album_img h2, .album_img h3 { font-size: 1rem; line-height: 1.4; overflow-wrap: anywhere; }
+.album_img p { margin-top: .4rem; font-size: .875rem; color: #555; }
+.album_caption { padding-block: 10px 4px; }
+.album_title { width: var(--content-width); margin: 24px auto 16px; }
+.profile_img { width: min(100% - 24px, 900px); height: clamp(180px, 56vw, 500px); }
+footer { height: auto; min-height: 80px; flex-wrap: wrap; gap: 8px 16px; padding-block: 16px; }
+footer p { margin: 0; }
+footer .sns { padding: 0; flex-wrap: wrap; gap: 8px; }
+footer .sns li { background-position: center; background-size: 20px; }
+footer a { width: 32px; height: 32px; }
+
+@media (max-width: 600px) {
+    .line {
+        --strip-height: 50px;
+        --strip-space: 20px;
+        animation-duration: 20s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .line, .profile_img div:nth-child(n) { animation: none; }
+    .profile_img div:first-child { visibility: visible; }
+    .profile_img div:not(:first-child) { display: none; }
+}
+
+
+.site-logo { display: block; width: 150px; height: 40px; background: url(img/logo.png) center / contain no-repeat; }
+
+header nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+    color: #303030;
+    font-size: clamp(.875rem, 1.7vw, 1.125rem);
+    font-weight: 300;
+    text-decoration: none;
+}
+
+header nav a:hover,
+header nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: .3em;
+}
+
+
+.home-intro {
+    width: var(--content-width);
+    margin: clamp(24px, 5vw, 64px) auto;
+    display: grid;
+    align-items: center;
+    gap: clamp(20px, 5vw, 64px);
+}
+
+.home-portrait {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+.home-intro h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+.home-intro p { margin-block: 8px 20px; }
+
+.home-intro .video-link {
+    display: inline-block;
+    padding: 12px 18px;
+    color: #fff;
+    background: #222;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.home-intro .video-link:hover { background: #444; }
+
+.discography-heading {
+    width: var(--content-width);
+    margin: clamp(28px, 5vw, 64px) auto clamp(32px, 6vw, 72px);
+    overflow-wrap: anywhere;
+}
+
+.album-jump {
+    width: var(--content-width);
+    margin: 0 auto 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.album-jump a {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 48px;
+    padding: 10px 16px;
+    border: 1px solid #9c948a;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #25211e;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+}
+
+.album-jump a[href="#studio-albums"] {
+    border-color: #403832;
+    background: #403832;
+    color: #fff;
+}
+
+.album-jump a:hover {
+    background: #eee9e3;
+}
+
+.album-jump a[href="#studio-albums"]:hover {
+    background: #594c42;
+}
+
+.album-jump a:focus-visible {
+    outline: 2px solid #403832;
+    outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+    .album-jump {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .album-jump a {
+        padding-inline: 6px;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Discography section hierarchy */
+.album-era-title {
+    padding-block-end: 0.45em;
+    border-bottom: 1px solid #bcb6ad;
+    font-size: clamp(1.65rem, 4vw, 2.4rem);
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.album-type-title {
+    margin-block-start: clamp(28px, 5vw, 48px);
+    padding-inline-start: 0.65em;
+    border-inline-start: 3px solid #81786e;
+    font-size: clamp(1.125rem, 2.5vw, 1.4rem);
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.album-era-title + .album-type-title {
+    margin-block-start: 16px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+.back-to-top {
+    position: fixed;
+    z-index: 2;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    background: #fff;
+    color: #222;
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-to-top:hover { background: #eee; }
+body > footer { padding-inline-end: calc(80px + env(safe-area-inset-right)); }
+.profile-layout {
+    width: var(--content-width);
+    margin: clamp(24px, 5vw, 64px) auto;
+    line-height: 1.8;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.profile-intro,
+.profile-details {
+    display: grid;
+    gap: clamp(24px, 5vw, 64px);
+}
+
+.profile-intro {
+    align-items: center;
+}
+
+.profile-summary h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+}
+
+.profile-summary .name {
+    margin-block: .4rem 1rem;
+    color: #595959;
+}
+
+.profile-intro .profile_img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin: 0;
+}
+
+.profile-details {
+    align-items: start;
+}
+
+.profile-career {
+    display: grid;
+    gap: 24px;
+}
+
+.profile-section h2 {
+    margin-bottom: .5rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+.profile-songs {
+    padding: clamp(16px, 3vw, 28px);
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.profile-song-list { padding: 0; }
+.profile-song-list li { padding-block: .75rem; }
+.profile-song-list li + li { border-top: 1px solid #d7d7d7; }
+.profile-song-list strong { display: block; margin-bottom: .15rem; }
+
+@media (min-width: 760px) {
+    .profile-intro,
+    .profile-details {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    }
+}
+.album_caption h2 a, .album_caption h3 a {
+    color: inherit;
+    text-underline-offset: .2em;
+}
+header { background: #faf8f4; }
+
+@media (min-width: 360px) {
+    :root { --card-columns: 2; }
+}
+
+@media (min-width: 760px) {
+    .home-intro { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+    .profile-career { grid-area: 1 / 1; }
+    .profile-songs { grid-area: 1 / 2; }
+}
+
+@media (min-width: 960px) {
+    :root { --card-columns: 4; }
+}
+#wrap {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.album_title[id] { scroll-margin-top: 170px; }
+
+.extra-page {
+    width: var(--content-width);
+    margin: clamp(24px, 5vw, 64px) auto;
+    overflow-wrap: anywhere;
+}
+
+.extra-page h1, .discography-heading { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+.extra-page h2 { margin-block: 1.75rem .75rem; }
+.extra-page a { color: inherit; text-underline-offset: .2em; }
+.extra-page .artwork-grid { width: 100%; margin: 24px 0 0; padding: 0; }
+.tour-dates { padding: 0; margin-top: 16px; }
+
+.tour-dates li {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr) minmax(0, 2fr);
+    gap: 4px 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.live-photos { margin-bottom: 16px; }
+
+.live-photos img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.live-photos figcaption { margin-top: 8px; }
+
+@media (max-width: 520px) {
+    .tour-dates li { grid-template-columns: 7rem minmax(0, 1fr); }
+    .tour-dates li span { grid-column: 2; }
+    .album_title[id] { scroll-margin-top: 190px; }
+}
+.home-section {
+    width: var(--content-width);
+    margin: clamp(32px, 6vw, 72px) auto;
+}
+
+.home-section h2 {
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+
+.home-section-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: inherit;
+    text-underline-offset: .25em;
+}
+
+.home-tour {
+    padding: clamp(20px, 4vw, 40px);
+    border: 1px solid #d7d7d7;
+}
+
+.home-tour h2 { margin-bottom: 8px; }
+#tour { scroll-margin-top: 190px; }
+
+
+main > :has(+ .line) {
+    margin-block-end: 0;
+}
+
+main > .line + *,
+main > .line + .extra-page > section > h2:first-child {
+    margin-block-start: 0;
+}
